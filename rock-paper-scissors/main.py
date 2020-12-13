@@ -44,8 +44,6 @@ elif user_input == 'paper':
     print(paper + "\n You selected paper!")
 elif user_input == 'scissors':
     print(scissors + "\n You selected scissors!")
-else:
-    print("R-O-C-K, P-A-P-E-R OR S-C-I-S-S-O-R-S... C\'mon... it\'s not that hard!")
 
 'The computer selected \n'
 if computer_choice == 'rock':
@@ -55,12 +53,16 @@ elif computer_choice == 'paper':
 elif computer_choice == 'scissors':
     print(scissors + "\n The computer selected scissors!")
 
+if user_input != rps[0] or rps[1] or rps[2]:
+    text = "\nType R-O-C-K, P-A-P-E-R OR S-C-I-S-S-O-R-S... C\'mon... it\'s not that hard!\n"
+    "I guess this means you lose...?"
+
 if user_input == 'rock':
     if computer_choice == 'scissors':
         text = "\nLooks like you win!"
     elif computer_choice == 'paper':
         text = "\nLooks like you lose!"
-    else:
+    elif computer_choice == 'rock':
         text = "\nLooks like it\'s a draw!"
 
 if user_input == 'paper':
@@ -68,7 +70,7 @@ if user_input == 'paper':
         text = '\nLooks like you win!'
     elif computer_choice == 'scissors':
         text = '\nLooks like you lose!'
-    else:
+    elif computer_choice == 'paper':
         text = "\nLooks like it\'s a draw!"
 
 if user_input == 'scissors':
@@ -76,7 +78,7 @@ if user_input == 'scissors':
         text = '\nLooks like you win!'
     elif computer_choice == 'rock':
         text = '\nLooks like you lose!'
-    else:
+    elif computer_choice == 'scissors':
         text = "\nLooks like it\'s a draw!"
 
 print(text)
