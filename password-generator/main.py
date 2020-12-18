@@ -22,13 +22,13 @@ for number in range(1, (nr_numbers+1)):
 for symbol in range(1, (nr_symbols+1)):
     password_symbols += symbols[random.randint(0, len(symbols)-1)]
 
+#Eazy Level - Order not randomised:
 easy_password = password_letters + password_numbers + password_symbols
 print(easy_password)
 
-
-#Eazy Level - Order not randomised:
-#e.g. 4 letter, 2 symbol, 2 number = JduE&!91
-
-
 #Hard Level - Order of characters randomised:
-#e.g. 4 letter, 2 symbol, 2 number = g^2jk8&P
+hard_password_list = [password_letters, password_numbers, password_symbols]
+shuffled = random.sample(hard_password_list, len(hard_password_list))
+hard_password = shuffled[0] + shuffled[1] + shuffled[2]
+print(hard_password)
+
