@@ -1,8 +1,8 @@
 import random
 from hangman_art import logo, stages
 from hangman_words import word_list
-# import os
-# from replit import clear
+
+import os
 
 print(logo)
 chosen_word = random.choice(word_list)
@@ -17,9 +17,8 @@ wrong_guess = []
 
 while not end_of_game:
     guess = input('Guess a letter\n').lower()
+    os.system('clear')
     print(f'You guessed the letter "{guess}"')
-    # os.system('clear')
-    # clear()
 
     if guess in display:
         print('You already guessed this letter. Try a different letter')
