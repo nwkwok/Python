@@ -1,5 +1,9 @@
-import random
+## This version of blackjack runs great but I'm struggling to restart the script once it is complete
 
+import random
+from art import logo
+
+print(logo)
 user_cards = []
 dealer_cards = []
 is_playing = False
