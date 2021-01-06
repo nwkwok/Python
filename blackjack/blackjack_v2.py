@@ -63,20 +63,19 @@ while True:
             print("Dealer wins with a blackjack!")
             break
         elif sum(dealer_cards) < sum(user_cards):
-            # print_scores(dealer)
             dealer_cards.append(random.choice(deck))
-            print(f"Dealer draws. {dealer_cards}")
+            print(f"Dealer draws. {dealer_cards} with a total of {sum(dealer_cards)}")
         elif sum(user_cards) < sum(dealer_cards) <= 21:
             # print_scores(dealer)
-            print('Dealer wins!')
+            print(f'Dealer wins with a total of {sum(dealer_cards)}!')
             break
         elif sum(dealer_cards) > 21:
             # print_scores(dealer)
-            print('Dealer busts. You win!')
+            print(f'Dealer busts with a total of {sum(dealer_cards)}. You win!')
             break
         elif sum(dealer_cards) == sum(user_cards):
             # print_scores(dealer)
-            print('Looks like it\'s a draw!')
+            print(f'Dealer has {sum(dealer_cards)}Looks like it\'s a draw!')
             break
 
     play_again = yes_or_no("Would you like to play again?")
