@@ -65,28 +65,23 @@ def refill_resources():
     print("Coffee machine has been refilled! Type 'report' to see resource amounts.")
 
 
-# def check_ingredients(selection):
-#     ingredient_cost = MENU[selection]['ingredients']
-#     for key in ingredient_cost:
-#         if ingredient_cost[key] > resources[key]:
-#             print(f'Sorry, there is not enough of {key}. Please type "refill" to refill machine.')
-#             return False
-#         elif ingredient_cost[key] <= resources[key]:
-#             return True
+def check_ingredients(ingredient_cost_list):
+    inventory = []
+    for c_key in ingredient_cost_list:
+        if ingredient_cost_list[c_key] > resources[c_key]:
+            inventory.append(False)
+    if False in inventory:
+        print(f'Sorry, there is not enough of {c_key}. Please type "refill" to refill machine.')
+        return False
+    elif ingredient_cost_list[c_key] <= resources[c_key]:
+        return True
 
 
 while True:
     coffee_selection = input('What would you like? espresso/latte/cappuccino/report/refill/off?: ').lower()
     if coffee_selection == 'espresso':
-        # enough_resources = check_ingredients(coffee_selection)
-        # while enough_resources:
-        ingredient_cost = MENU['espresso']['ingredients']
-        for key in ingredient_cost:
-            if ingredient_cost[key] > resources[key]:
-                print(f'Sorry, there is not enough of {key}. Please type "refill" to refill machine.')
-                enough_resources = False
-            elif ingredient_cost[key] <= resources[key]:
-                enough_resources = True
+        ingredient_cost = MENU[coffee_selection]['ingredients']
+        enough_resources = check_ingredients(ingredient_cost)
         while enough_resources:
             coins_inserted = check_coin_type()
             amount_inserted = calculate_inserted_coins(coins_inserted)
