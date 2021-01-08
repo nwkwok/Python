@@ -13,17 +13,11 @@ def report():
 
 def update_resources(selection):
     ingredients = MENU[selection]['ingredients']
-    ingredient_keys = ingredients.keys()
-    for key in ingredient_keys:
-        if key == 'water':
-            resources['water'] -= ingredients['water']
-        if key == 'milk':
-            resources['milk'] -= ingredients['milk']
-        if key == 'coffee':
-            resources['coffee'] -= ingredients['coffee']
+    for key in ingredients.keys():
+        resources[key] -= ingredients[key]
 
 
-def check_coin_type():
+def coin_inputs():
     quarter = float(input('How many quarters? '))
     dime = float(input('How many dimes? '))
     nickel = float(input('How many nickels? '))
@@ -47,17 +41,6 @@ def track_money(selection):
         resources['money'] = resources['money'] + MENU[selection]['cost']
 
 
-def accept_reject_order(selection):
-    if amount_inserted >= MENU[selection]['cost']:
-        money_returned = amount_inserted - MENU[selection]['cost']
-        print(f"Here is your change: ${money_returned:.2f}")
-        print(f"Enjoy your {selection} ☕️!")
-        return True
-    else:
-        print(f"Sorry - you don't have enough money! Money returned: ${amount_inserted:.2f}")
-        return False
-
-
 def refill_resources():
     resources['water'] = 300
     resources['milk'] = 200
@@ -65,43 +48,55 @@ def refill_resources():
     print("Coffee machine has been refilled! Type 'report' to see resource amounts.")
 
 
-def check_ingredients(ingredient_cost_list):
-    inventory = []
+def check_ingredients(selection):
+    ingredient_cost_list = MENU[selection]['ingredients']
     for c_key in ingredient_cost_list:
         if ingredient_cost_list[c_key] > resources[c_key]:
-            inventory.append(False)
-    if False in inventory:
-        print(f'Sorry, there is not enough of {c_key}. Please type "refill" to refill machine.')
-        return False
-    elif ingredient_cost_list[c_key] <= resources[c_key]:
+            print(f'Sorry, there is not enough of {c_key}. Please type "refill" to refill machine.')
+            return False
+    return True
+
+
+def accept_reject_order(selection, total_amount):
+    if total_amount >= MENU[selection]['cost']:
+        money_returned = total_amount - MENU[selection]['cost']
+        print(f"Here is your change: ${money_returned:.2f}")
+        print(f"Enjoy your {selection} ☕️!")
         return True
+    print(f"Sorry - you don't have enough money! Money returned: ${total_amount:.2f}")
+    return False
+
+
+def run_coffee_order(selection):
+    enough_resources = check_ingredients(selection)
+    if enough_resources == False:
+        return False
+    coins_inserted = coin_inputs()
+    amount_inserted = calculate_inserted_coins(coins_inserted)
+    order_status = accept_reject_order(selection, amount_inserted)
+    if order_status:
+        track_money(selection)
+        update_resources(selection)
+    return False
+
+
+def run_coffee_cycle():
+    coffee_selection = input('What would you like? espresso/latte/cappuccino/report/refill/off?: ').lower()
+    if coffee_selection in {'espresso', 'latte', 'cappuccino'}:
+        run_coffee_order(coffee_selection)
+    elif coffee_selection == 'report':
+        report()
+    elif coffee_selection == 'refill':
+        refill_resources()
+    elif coffee_selection == 'off':
+        print("Turn me on when you're ready for your caffeine fill!")
+        exit()
+    else:
+        print("Please make a valid selection.")
+    return coffee_selection
 
 
 while True:
-    coffee_selection = input('What would you like? espresso/latte/cappuccino/report/refill/off?: ').lower()
-    if coffee_selection == 'espresso':
-        ingredient_cost = MENU[coffee_selection]['ingredients']
-        enough_resources = check_ingredients(ingredient_cost)
-        while enough_resources:
-            coins_inserted = check_coin_type()
-            amount_inserted = calculate_inserted_coins(coins_inserted)
-            order_status = accept_reject_order(coffee_selection)
-            if order_status:
-                track_money(coffee_selection)
-                update_resources(coffee_selection)
-                enough_resources = False
-    if coffee_selection == 'report':
-        report()
-    if coffee_selection == 'refill':
-        refill_resources()
-    if coffee_selection == 'off':
-        print("Turn me on when you're ready for your caffeine fill!")
-        break
+    run_coffee_cycle()
 
 
-# TODO: Turn off coffee machine by entering "off" to the prompt
-# TODO: Print Report
-# TODO: Check if resources are sufficient
-# TODO: Process coins
-# TODO: Check if transacation was successful
-# TODO: Make Coffee
