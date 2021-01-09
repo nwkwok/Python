@@ -1,23 +1,56 @@
 from turtle import Turtle, Screen
-from prettytable import PrettyTable
+import random
 
-# timmy = Turtle()
-# print(timmy)
-# timmy.shape('turtle')
-# timmy.color('azure4', 'beige')
-# timmy.forward(100)
-# timmy.left(90)
-# timmy.forward(100)
-# my_screen = Screen()
-# print(my_screen.canvheight)
+screen = Screen()
 
-# my_screen.exitonclick()
+tom = Turtle()
+tom.speed('fastest')
+tom.shape('turtle')
+screen.colormode(255)
 
-table = PrettyTable()
-table.add_column('Pokemon Name',
-                 ['Pikachu', 'Squirtle', 'Charmander'])
-table.add_column('Type',
-                 ['Electric', 'Water', 'Fire'])
 
-table.align = 'l'
-print(table)
+def random_color():
+    r = random.randint(0, 255)
+    g = random.randint(0, 255)
+    b = random.randint(0, 255)
+    color = (r, g, b)
+    return color
+
+
+def draw_spirograph(size_of_gap):
+    for _ in range(int(360 / size_of_gap)):
+        tom.color(random_color())
+        tom.circle(100)
+        tom.setheading(tom.heading() + size_of_gap)
+
+draw_spirograph(2)
+
+
+# color = ['CornflowerBlue', 'DarkOrchid', 'IndianRed', 'DeepSkyBlue', 'LightSeaGreen', 'Wheat']
+# movement = ['forward', 'backward']
+# direction = [0, 90, 180, 270]
+
+
+# def draw_shape(number_of_sides):
+#     angle = 360/number_of_sides
+#     for _ in range(number_of_sides):
+#         tom.forward(50)
+#         tom.left(angle)
+
+# for i in range(3, 20):
+#     tom.color(random.choice(color))
+#     draw_shape(i)
+#     i += 1
+
+# for _ in range(100):
+#     tom.color(random.choice(color))
+#     tom.forward(30)
+#     tom.left(random.choice(direction))
+#
+
+
+
+
+
+
+screen.exitonclick()
