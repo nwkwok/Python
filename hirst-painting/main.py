@@ -26,8 +26,10 @@ color_list = [(226, 231, 235), (54, 108, 149), (225, 201, 108), (134, 85, 58),
 
 def row_of_dots():
     for _ in range(10):
+        t.showturtle()
         t.dot(20, random.choice(color_list))
         t.forward(50)
+        t.hideturtle()
 
 
 def set_for_new_row():
@@ -38,8 +40,11 @@ def set_for_new_row():
     t.left(180)
 
 
+
+
 for _ in range(10):
     row_of_dots()
     set_for_new_row()
 
+t.hideturtle()
 screen.exitonclick()
