@@ -36,8 +36,12 @@ ul {
   margin-bottom: 20px;
 }
 
-.article-title {
+a.article-title {
   color: #444444;
+}
+
+a:link {
+text-decoration: none;
 }
 
 a.article-title:hover {
