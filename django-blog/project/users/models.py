@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from PIL import Image
+# from PIL import Image
 
 
 class Profile(models.Model):
@@ -10,14 +10,16 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username} Profile'
 
-    def save(self, **kwargs):
-        super().save()
+    # def save(self, **kwargs):
+    #     super().save()
+    #
+    #     img = Image.open(self.image.path)
+    #
+    #     if img.height > 300 or img.width > 300:
+    #         output_size = (300, 300)
+    #         img.thumbnail(output_size)
+    #         img.save(self.image.path)
 
-        img = Image.open(self.image.path)
-
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
-            img.thumbnail(output_size)
-            img.save(self.image.path)
-
-
+    # Resizing works with local but to do with an S3 bucket, we would need
+    # to create an AWS Lambda function that resizes the images for you
+    # automatically when they get uploaded to S3
