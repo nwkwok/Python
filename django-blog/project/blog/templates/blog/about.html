@@ -1,5 +1,24 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-    <h1>About Page</h1>
+<h1 class="mb-4">About This Blog</h1>
+        <article class="media content-section d-flex flex-row justify-content-start">
+          <div class="media-body px-3 pt-2">
+              <h3>Django</h3>
+              <p class="article-content">As the title 'Django Blog' implies, this blog was made using Django and was deployed with Heroku. The goal of this project was to try to work through the Django documentation and code from other Django projects/sources to utilize as many Django features as possible.
+                  <br>TL;DR <a href="https://github.com/nwkwok/django-blog">here is my GitHub repo :P</a></p>
+              <h3>Frontend</h3>
+              <p class="article-content">The frontend of this blog was structured with templates, styled with Bootsrap while the forms were styled using Crispy Forms. There are some pages that were made using Function-Based Views but, the majority of the views were made with Class-Based Views. If you're unfamiliar with these terms, <a href="https://medium.com/@ksarthak4ever/django-class-based-views-vs-function-based-view-e74b47b2e41b">here's a great article</a> to help outline the differences between the two. This blog uses Django's Paginator to enhance the UX as the number of posts increase.</p>
+              <h3>Backend</h3>
+              <p class="article-content">While Django comes built-in with SQLite, I configured this blog to use PostreSQL. Profile images are stored in an AWS S3 bucket. User Creation and Authentication are handled using Django's built-in auth forms and user authorization is handled using decorators with the function-based views and mix-ins for the class-based views. Password recovery was configured using Django's built in password reset capability with Gmail as the email server.</p>
+              <h3>Project Dependencies</h3>
+              <p>Here is a list of all the key dependencies used for this project.</p>
+              <li>django... duh :).</li>
+              <li>psycopg2 - to connect with PostgreSQL</li>
+              <li>boto3 - to configure and manage AWS services</li>
+              <li>django-crispy-forms - to style forms</li>
+              <li>bootstrap - to style templates</li>
+              <li>django-heroku - to help configure heroku deployment</li>
+          </div>
+        </article>
 {% endblock content %}
 
